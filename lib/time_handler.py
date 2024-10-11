@@ -15,15 +15,8 @@ class TimeHandler:
         return ", ".join(cities)
     
     def get_current_gmt_time(self):
-        # try `curl "http://worldtimeapi.org/api/timezone/GMT"` to see the
-        # returned value we store in time_json
         time_json = requests.get("http://worldtimeapi.org/api/timezone/GMT")
-        
-        # date_time will look something like:
-        # "2023-10-28T18:56:55.015943+00:00"
         date_time = datetime.fromisoformat(time_json.json()["datetime"])
-        
-        # returned string will be a time formatted such as "18:56"
         return time(date_time.hour, date_time.minute).isoformat(timespec="minutes")
     
     def print_current_time_zone_times(self):
